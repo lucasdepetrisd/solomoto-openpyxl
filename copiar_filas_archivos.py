@@ -11,7 +11,7 @@ wpt = pt.active
 p_row_count = wp.max_row
 pt_row_count = wpt.max_row
 print("Nro filas en productos.xlsx: " + str(p_row_count))
-print("Nro filas en productostipodeta.xlsx: " + str(pt_row_count))
+# print("Nro filas en productostipodeta.xlsx: " + str(pt_row_count))
 codp_list = []
 codpt_list = []
 

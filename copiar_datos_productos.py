@@ -1,6 +1,6 @@
 # Copiar filas de un archivo a otro
 
-import math
+import outputs
 from openpyxl import Workbook, load_workbook
 from openpyxl.utils import get_column_letter
 
@@ -15,21 +15,6 @@ print("Nro filas en productos (1).xlsx: " + str(p_row_count))
 # print("Nro filas en null_5780278647463692669.xlsx: " + str(pt_row_count))
 codp_list = []
 codpt_list = []
-
-def mensaje(prod, y, msg):
-    if prod[0] is None:
-        prod[0] = "Sin Codigo"
-
-    if msg == "append":
-        print("Appended: " + prod[0] + " a fila " + str(y))
-    elif msg == "copy":
-        print("Copied: " + prod[0] + " a fila " + str(y))
-
-def progreso(progreso, total):
-    porcentaje = 100 * (progreso / float(total))
-    bar = '█' * int(porcentaje) + '-' * (100 - int(porcentaje))
-    print(f"\r|{bar}| {porcentaje:.2f}%", end="\r")
-    # print("Progreso: " + "%.2f" % (x*100/total) + "%")
 
 def copy_row(x, y):
     tuplapt = tuple(wpt['A' + str(y+2): 'AE' + str(y+2)])
@@ -69,16 +54,16 @@ for x, prod in enumerate(codp_list):
     for y, codpt in enumerate(codpt_list):
         if prod[0] == codpt:
             copy_product(prod, y + 2)
-            # mensaje(prod, y, "add")
+            # outputs.mensaje(prod, y, "add")
             fp.write("(%s), " % prod[0] + ", " + str(y+1))
             break
         elif y == lencodpt_list-1:
             copy_product(prod, lencodpt_list)
-            # mensaje(prod, y, "append")
+            # outputs.mensaje(prod, y, "append")
             codpt_list.append(prod[0])
             lencodpt_list += 1
             fp.write("(%s), " % prod[0] + ", " + str(y+1))
             break
-    progreso(x, lencodp_list)
+    outputs.progreso(x, lencodp_list)
 
 pt.save('../null_5780278647463692669.xlsx')

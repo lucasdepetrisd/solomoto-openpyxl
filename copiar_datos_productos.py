@@ -16,6 +16,21 @@ print("Nro filas en productos (1).xlsx: " + str(p_row_count))
 codp_list = []
 codpt_list = []
 
+def mensaje(prod, y, msg):
+    if prod[0] is None:
+        prod[0] = "Sin Codigo"
+
+    if msg == "append":
+        print("Appended: " + prod[0] + " a fila " + str(y))
+    elif msg == "copy":
+        print("Copied: " + prod[0] + " a fila " + str(y))
+
+def progreso(progreso, total):
+    porcentaje = 100 * (progreso / float(total))
+    bar = '█' * int(porcentaje) + '-' * (100 - int(porcentaje))
+    print(f"\r|{bar}| {porcentaje:.2f}%", end="\r")
+    # print("Progreso: " + "%.2f" % (x*100/total) + "%")
+
 def copy_row(x, y):
     tuplapt = tuple(wpt['A' + str(y+2): 'AE' + str(y+2)])
     for z in range(31):
@@ -54,28 +69,16 @@ for x, prod in enumerate(codp_list):
     for y, codpt in enumerate(codpt_list):
         if prod[0] == codpt:
             copy_product(prod, y + 2)
+            # mensaje(prod, y, "add")
             fp.write("(%s), " % prod[0] + ", " + str(y+1))
             break
         elif y == lencodpt_list-1:
             copy_product(prod, lencodpt_list)
+            # mensaje(prod, y, "append")
             codpt_list.append(prod[0])
             lencodpt_list += 1
             fp.write("(%s), " % prod[0] + ", " + str(y+1))
             break
+    progreso(x, lencodp_list)
 
-# pt.save('../null_5780278647463692669.xlsx')
-
-# 	# print(str(nom) + "\t" + str(cat) + "\t" + str(cuil) + "\t" + str(dom) + "\t" + str(cel))
-# 	for y in range(filastot, 1, -1):
-# 		# print(str(y))
-# 		nom2 = wp.cell(y, 2).value
-# 		cat2 = wp.cell(y, 7).value
-# 		cuil2 = wp.cell(y, 8).value
-# 		dom2 = wp.cell(y, 16).value
-# 		cel2 = wp.cell(y, 20).value
-# 		if (x != y):
-# 			if (nom1 == nom2 and cat1 == cat2 and cuil1 == cuil2 and dom1 == dom2 and cel1 == cel2):
-# 				print("Se encontro duplicado en filas " + str(x) + " y " + str(y))
-# 				eliminar(y)
-# 				encontrados += 1
-# print("Se encontraron " + str(encontrados) + " duplicados")
+pt.save('../null_5780278647463692669.xlsx')

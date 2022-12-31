@@ -7,7 +7,8 @@ def mensaje(prod, y, msg):
     elif msg == "copy":
         print("Copied: " + prod[0] + " a fila " + str(y))
 
-def progreso(progreso, total):
+def progreso(progreso: int, total: int, mensaje = ""):
     porcentaje = 100 * (progreso / float(total))
     bar = '█' * int(porcentaje) + '-' * (100 - int(porcentaje))
     print(f"\r|{bar}| {porcentaje:.2f}%", end="\r")
+    # print(f"\r|{bar}| {porcentaje:.2f}% | {mensaje}", end="\r")

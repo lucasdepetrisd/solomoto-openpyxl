@@ -9,6 +9,7 @@ def mensaje(prod, y, msg):
 
 def progreso(progreso: int, total: int, mensaje = ""):
     porcentaje = 100 * (progreso / float(total))
-    bar = '█' * int(porcentaje) + '-' * (100 - int(porcentaje))
-    print(f"\r|{bar}| {porcentaje:.2f}%", end="\r")
-    # print(f"\r|{bar}| {porcentaje:.2f}% | {mensaje}", end="\r")
+    bar = '█' * int(porcentaje) + '-' * (100 - int(porcentaje))  
+    print(f"\r|{bar}| {porcentaje:.2f}% | {mensaje}", end="\r")
+def fin_progreso():
+    print(f"\r|{'█'*100}| {100:.2f}%", end="\r")      

@@ -34,14 +34,14 @@ dir = g.diropenbox( "Elige la carpeta de destino" )
 filename1 = g.fileopenbox( 'Elige la lista de precios nuevos' )
 
 text = "Ingresa los siguientes datos:"
-input_list = ["Columna Codigo", "Columna Precio", "Fila Inicial", "Fila Final"]
-default_list = ["A", "D", "9", "5996"]
+input_list = ["Columna Codigo", "Columna Precio", "Fila Inicial", "Fila Final", "Nro Hoja"]
+default_list = ["A", "D", "1", "5000", "1"]
 output = g.multenterbox(text, title, input_list, default_list)
 
 filename2 = g.fileopenbox( 'Elige la plantilla de Dux' )
 
-c = xls_to_xlsx(filename1)
-d = xls_to_xlsx(filename2)
+c = xls_to_xlsx(filename1, int(output[4]))
+d = xls_to_xlsx(filename2, 1)
 
 wc = c.active
 wd = d.active
@@ -106,21 +106,21 @@ print("Comparando listas...")
 for x, prodc in enumerate(cat_list):
     for y, prodd in enumerate(dux_list):
         
-        if prodc[0] == prodd[1]:
+        if (prodc[0] == prodd[1]) & (prodd[1] != ""):
             copy_price(wd, prodc[1], y + dux_fila_ini, dux_col_prec)
             fok.write("SE ACTUALIZA \"%s\" " % prodc[0] + "CON PRECIO $%s " % prodc[1] +  "EN FILA " + str(y + dux_fila_ini) + ".\n")
             copycount += 1
             break
         elif y == len(dux_list)-1:
             for z, prodd2 in enumerate(dux_list):
-                if prodc[0] == prodd2[0]:
+                if (prodc[0] == prodd2[0]) & (prodd[0] != ""):
                     copy_price(wd, prodc[1], z + dux_fila_ini, dux_col_prec)
                     fok.write("SE ACTUALIZA \"%s\" " % prodc[0] + "CON PRECIO $%s " % prodc[1] +  "EN FILA " + str(z + dux_fila_ini) + ".\n")
                     copycount += 1
                     break
             else:
                 # print(str(prodc))
-                fer.write("NO SE ENCONTRÓ \"%s\" " % prodc[0] +  "EN FILA " + str(x) + ".\n")
+                fer.write("NO SE ENCONTRÓ \"%s\" " % prodc[0] +  "EN FILA " + str(x + 1) + ".\n")
                 errorcount += 1
                 break
     outputs.progreso(x, lencodp_list)

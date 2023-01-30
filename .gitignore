@@ -138,5 +138,5 @@ dmypy.json
 # openpyxl
 *.xlsx
 *.xls
-*.ico
+# *.ico
 *.exe

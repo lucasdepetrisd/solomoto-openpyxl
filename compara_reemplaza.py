@@ -1,4 +1,4 @@
-import easygui as g
+﻿import easygui as g
 import outputs
 from openpyxl import Workbook, load_workbook
 from openpyxl.utils import get_column_letter
@@ -137,8 +137,7 @@ print('\nGuardado exitoso.\nConvirtiendo a .xls...')
 end_time = time.time()
 
 message = "Actualización finalizada.\nTiempo total de ejecución: {0:.2f} segundos.\nSe actualizaron {1} precios.\nSe encontraron {2} errores.\nSu archivo se encuentra en {3}.\nPresione OK para guardar en formato .xls y terminar.".format(end_time - start_time, copycount, errorcount, path)
+msg = g.msgbox(message, title)
 
 xlsx_to_xls(path)
 print('\nGuardado exitoso.')
-
-msg = g.msgbox(message, title)

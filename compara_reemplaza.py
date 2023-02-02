@@ -5,6 +5,7 @@ from openpyxl.utils import get_column_letter
 from openpyxl.utils.cell import coordinate_from_string, column_index_from_string
 from conv_formats import xls_to_xlsx, xlsx_to_xls
 import time
+import numpy as np
 start_time = time.time()
 
 # PROGRAMA QUE OBTIENE LOS CODIGOS DE DOS ARCHIVOS
@@ -78,6 +79,7 @@ for x in range(cat_fila_ini, cat_fila_fin + 1):
     precio = wc.cell(x, cat_col_prec).value
     cat_list.append([codprod, precio])
 
+cat_np = np.array(cat_list)
 print("Lista 1 creada.")
 
 # CREATE DUX LIST
@@ -87,6 +89,7 @@ for x in range(dux_fila_ini, dux_nro_filas + 1):
     codbarra = wd.cell(x, dux_col_bar).value
     dux_list.append([codprod, codbarra])
 
+dux_np = np.array(dux_list)
 print("Lista 2 creada.")
 
 lencodp_list = len(cat_list)
@@ -104,25 +107,29 @@ msg = g.msgbox("Presiona OK para comenzar la ejecución. Esto puede tardar unos 
 print("Comparando listas...")
 
 for x, prodc in enumerate(cat_list):
-    for y, prodd in enumerate(dux_list):
+    # for y, prodd in enumerate(dux_list):
         
-        if (prodc[0] == prodd[1]) & (prodd[1] != ""):
-            copy_price(wd, prodc[1], y + dux_fila_ini, dux_col_prec)
-            fok.write("SE ACTUALIZA \"%s\" " % prodc[0] + "CON PRECIO $%s " % prodc[1] +  "EN FILA " + str(y + dux_fila_ini) + ".\n")
-            copycount += 1
-            break
-        elif y == len(dux_list)-1:
-            for z, prodd2 in enumerate(dux_list):
-                if (prodc[0] == prodd2[0]) & (prodd[0] != ""):
-                    copy_price(wd, prodc[1], z + dux_fila_ini, dux_col_prec)
-                    fok.write("SE ACTUALIZA \"%s\" " % prodc[0] + "CON PRECIO $%s " % prodc[1] +  "EN FILA " + str(z + dux_fila_ini) + ".\n")
-                    copycount += 1
-                    break
-            else:
-                # print(str(prodc))
-                fer.write("NO SE ENCONTRÓ \"%s\" " % prodc[0] +  "EN FILA " + str(x + 1) + ".\n")
-                errorcount += 1
-                break
+    #     if (prodc[0] == prodd[1]) & (prodd[1] != ""):
+    #         copy_price(wd, prodc[1], y + dux_fila_ini, dux_col_prec)
+    #         fok.write("SE ACTUALIZA \"%s\" " % prodc[0] + "CON PRECIO $%s " % prodc[1] +  "EN FILA " + str(y + dux_fila_ini) + ".\n")
+    #         copycount += 1
+    #         break
+    #     elif y == len(dux_list)-1:
+    #         for z, prodd2 in enumerate(dux_list):
+    #             if (prodc[0] == prodd2[0]) & (prodd[0] != ""):
+    #                 copy_price(wd, prodc[1], z + dux_fila_ini, dux_col_prec)
+    #                 fok.write("SE ACTUALIZA \"%s\" " % prodc[0] + "CON PRECIO $%s " % prodc[1] +  "EN FILA " + str(z + dux_fila_ini) + ".\n")
+    #                 copycount += 1
+    #                 break
+    #         else:
+    #             # print(str(prodc))
+    #             fer.write("NO SE ENCONTRÓ \"%s\" " % prodc[0] +  "EN FILA " + str(x + 1) + ".\n")
+    #             errorcount += 1
+    #             break
+
+    if prodc[0] in dux_np:
+        index = np.where(prodc[0] == dux_list)
+
     outputs.progreso(x, lencodp_list)
 outputs.fin_progreso()
 

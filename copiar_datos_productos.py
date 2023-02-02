@@ -77,8 +77,8 @@ for x, prod in enumerate(codp_list):
         # if b:
         #     print(prod[0] + ' | ' + prodpt[0])
         
-        if prod[0] == '007001010026' and y == 25889:
-            wait = input("Pause 1")
+        # if prod[0] == '007001010026' and y == 25889:
+        #     wait = input("Pause 1")
         
         if prod[0] == prodpt[0]:
             copy_product(prod, y + 2)
@@ -87,8 +87,8 @@ for x, prod in enumerate(codp_list):
             break
         elif y == lencodpt_list-1:
             for z, prodpt2 in enumerate(codpt_list):
-                if prod[0] == '007001010026' and z == 3054:
-                    wait = input("Pause 2")
+                # if prod[0] == '007001010026' and z == 3054:
+                #     wait = input("Pause 2")
 
                 if prod[0] == prodpt2[1]:
                     copy_product(prod, z + 2)

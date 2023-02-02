@@ -23,7 +23,7 @@ def list_to_column(wb , li: list, row: int, column: int):
         wb.cell(row=row + offset, column=column).value = value
     return wb
 
-w = load_workbook('../../Tablas/diciembre/nuevoprod.xlsx')
+w = load_workbook('../../Tablas/diciembre/nuevo2.xlsx')
 wb = w.active
 wb = w['Hoja Nueva']
 
@@ -38,7 +38,7 @@ for x in range(2, max_rows+1, 1):
     nombre = wb.cell(x, 3).value
     nombres.append(nombre)
 
-# print("ultimo nombre ", nombres)
+print("Último nombre: " + nombre)
 
 print("Lista creada.")
 
@@ -56,4 +56,4 @@ for x, nombre in enumerate(nombres):
 wb = list_to_column(wb, marcas, 1, 28)
 
 print('\nEjecución finalizada.')
-# w.save('./nuevoprod.xlsx')
+w.save('./nuevo2edit.xlsx')

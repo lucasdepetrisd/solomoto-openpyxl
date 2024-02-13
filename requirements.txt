@@ -23,7 +23,7 @@ easygui @ file:///D:/bld/easygui_1667123778696/work
 et-xmlfile @ file:///home/conda/feedstock_root/build_artifacts/et_xmlfile_1674664118162/work
 executing==1.2.0
 fastjsonschema==2.18.0
-fonttools==4.41.1
+fonttools==4.43.0
 fqdn==1.5.1
 idna==3.4
 ipykernel==6.25.0
